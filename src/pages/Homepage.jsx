@@ -22,7 +22,14 @@ export default function Homepage({ allTasks, setAllTasks }) {
     return <h3>loading...</h3>;
   }
 
-
+  const handelDelete = async (id)=>{
+    try {
+        await axios.delete(`${path}/tasks/${id}`)
+        console.log(`${path}/tasks/${id}`)
+    } catch (error) {
+        return "error"
+    }
+  }
 
   return (
     <div>
@@ -36,7 +43,7 @@ export default function Homepage({ allTasks, setAllTasks }) {
                 <li>{isUrgent}</li>
                 <li>{isDone}</li>
                 <li>{dueDate}</li>
-                {/* <button onClick={} >delete</button> */}
+                <button onClick={() => {handelDelete(id)}} >delete</button>
             </ul>
           )
         },
