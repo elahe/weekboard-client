@@ -1,66 +1,59 @@
-import React, { useEffect } from "react";
+import { useEffect ,useState} from "react";
 import axios from "axios";
 import TaskForm from "../components/TaskForm";
+import EditModal from "../components/EditModal";
 
 
-export default function Homepage({ allTasks, setAllTasks,allCategory,setAllCategory,api }) {
+
+export default function Homepage({ allTasks, setAllTasks,allCategory,setAllCategory,api,getData }) {
+    // {console.log(allCategory)}
+
+    //test 
+    const [selectedTask, setSelectedTask] = useState(null);
 
   
   // deleting function
-  console.log
 
   const handelDelete = async (id)=>{
     try {
         await axios.delete(`${api}/tasks/${id}`)
-        console.log(`${api}/tasks/${id}`)
+        getData();
+        // console.log(`${api}/tasks/${id}`)
     } catch (error) {
         return "error"
     }
   }
 
-  // fetching categories
-
-//   const getDataCategory = async () => {
-//     try {
-//         const response = await axios.get(`${path}/categories`)
-//         setAllCategory(response.data)
-//         console.log(response.data)
-//     } catch (error) {
-//         return "error"
-//     }
+  //edit button
+//   const handleEdit = (id) => {
 
 //   }
-//   useEffect(() => {
-//     getDataCategory()
-//   },[])
 
-
-//   //conditions should be after hooks
-
-//   if (allCategory === null) {
-//     return <h3>loading...</h3>;
-//   }
-
-//   if (allTasks.length === 0) {
-//     return <h3>loading...</h3>;
-//   }
+ 
 
 
   return (
     <div>
+        {/* <EditModal allTasks={allTasks} setAllTasks ={setAllTasks} allCategory={allCategory} setAllCategory={setAllCategory} api={api}/> */}
 
+       {selectedTask && <EditModal selectedTask={selectedTask} setSelectedTask={setSelectedTask} allTasks ={allTasks} api={api} allCategory={allCategory} getData={getData}/>}
+        {/* <EditModal selectedTask={selectedTask} setSelectedTask={setSelectedTask} allTasks ={allTasks} api={api} allCategory={allCategory}/> */}
         <TaskForm allTasks={allTasks} setAllTasks ={setAllTasks} allCategory={allCategory}setAllCategory={setAllCategory} api={api}/>
-      {allTasks.map(({ id, title, description, isUrgent, isDone, dueDate,category },i,) => {
+      {allTasks.map((eachTask,i) => {
           return(
-            <ul key={id}>
-                <li >{title}</li>
-                <li>{description}</li>
-                <li>{isUrgent}</li>
-                <li>{isDone}</li>
-                <li>{dueDate}</li>
-                <li>{category.title}</li>
+            <ul key={eachTask.id} style={{border:"1px solid white"}}>
+                <li >{eachTask.title}</li>
+                <li>{eachTask.description}</li>
+                <li>{eachTask.isUrgent}</li>
+                <li>{eachTask.isDone}</li>
+                <li>{eachTask.dueDate}</li>
+                <li>{eachTask.category.title}</li>
                 
-                <button onClick={() => {handelDelete(id)}} >delete</button>
+                
+                <button onClick={() => {handelDelete(eachTask.id)}} >delete</button>
+                <button onClick={() => {setSelectedTask(eachTask)}}>edit</button>
+                
+
             </ul>
           )
         },

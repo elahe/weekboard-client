@@ -4,10 +4,10 @@ import React, { useEffect, useState } from 'react'
 export default function TaskForm({ allTasks, setAllTasks,allCategory,setAllCategory,api }) {
     const [title,setTitle] = useState("")
     const [isUrgent,setIsUrgent] = useState(false)
-    const[description,setDescription] =useState("")
+    const [description,setDescription] =useState("")
     const [dueDate,setDueDate]= useState("")
     const [categoryId,setCategoryId] = useState("")
-    // console.log(api)
+//    {console.log(allCategory)}
 
     const handleAdd = async(e) => {
         e.preventDefault()
@@ -17,7 +17,7 @@ export default function TaskForm({ allTasks, setAllTasks,allCategory,setAllCateg
             isUrgent,
             description,
             dueDate,
-            categoryId: categoryId || "c2"
+            categoryId
         }
         try {
             await axios.post(`${api}/tasks`,body)
@@ -25,12 +25,10 @@ export default function TaskForm({ allTasks, setAllTasks,allCategory,setAllCateg
         } catch (error) {
             return "error"
         }
-
-
     }
 
     //for categories
-    useEffect
+    // useEffect
 
     
   return (
@@ -40,7 +38,12 @@ export default function TaskForm({ allTasks, setAllTasks,allCategory,setAllCateg
             <label><input type='text' placeholder='task' value={title} onChange={(e)=> setTitle(e.target.value)}></input></label>
             <label><input type="checkbox" value={isUrgent} onChange={(e)=> setIsUrgent(e.target.value)}></input></label>
             <select>
-                {/* {console.log()} */}
+                {console.log(allCategory[0].title)}
+                {allCategory.map((eachCaterogy)=>{
+                    return(
+                    <option key={eachCaterogy.id} value={eachCaterogy.title}>{eachCaterogy.title}</option>
+                )
+                })}
             </select>
             <label><input type='text' value={description} onChange={(e)=> setDescription(e.target.value)}></input></label>
             <input type="date" value={dueDate} onChange={(e) => setDueDate(e.target.value)}
