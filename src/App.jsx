@@ -15,14 +15,15 @@ function App() {
     const getData = async () => {
     try {
       const Response = await axios.get(`${API}/tasks?_expand=category`);
-      setAllTasks(Response.data); //before adding the arr to the state loop through every element and creat new property with a month
+      // Extract day of the week from dueDate and add as new property
       Response.data.forEach(element => {
-        const taskDate = new Date(element.dueDate)
-        console.log(taskDate)
+        const taskDate = new Date(element.dueDate);
+        element.dayOfWeek = taskDate.toLocaleDateString('en-US', { weekday: 'long' });
       });
+      console.log(Response.data)
+      setAllTasks(Response.data);
       const response = await axios.get(`${API}/categories`)
       setAllCategory(response.data)
-      // console.log(Response.data);
     } catch (error) {
       console.log(error)
     }

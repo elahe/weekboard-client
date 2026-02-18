@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function TaskCard({eachTask,allTasks,allCategory,handelDelete,setSelectedTask}) {
+export default function TaskItem({eachTask,allTasks,allCategory,handelDelete,setSelectedTask}) {
   return (
     <div >
         <ul style={{border:"1px solid white"}}>
