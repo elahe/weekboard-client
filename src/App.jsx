@@ -24,7 +24,7 @@ function App() {
       setAllCategory(response.data)
       // console.log(Response.data);
     } catch (error) {
-      return "error";
+      console.log(error)
     }
   };
   useEffect(() => {

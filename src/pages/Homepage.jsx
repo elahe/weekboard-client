@@ -2,6 +2,7 @@ import { useEffect ,useState} from "react";
 import axios from "axios";
 import TaskForm from "../components/TaskForm";
 import EditModal from "../components/EditModal";
+import TaskCard from "../components/TaskItem";
 
 
 
@@ -20,7 +21,7 @@ export default function Homepage({ allTasks, setAllTasks,allCategory,setAllCateg
         getData();
         // console.log(`${api}/tasks/${id}`)
     } catch (error) {
-        return "error"
+        console.log(error)
     }
   }
 
@@ -34,27 +35,12 @@ export default function Homepage({ allTasks, setAllTasks,allCategory,setAllCateg
 
   return (
     <div>
-        {/* <EditModal allTasks={allTasks} setAllTasks ={setAllTasks} allCategory={allCategory} setAllCategory={setAllCategory} api={api}/> */}
-
        {selectedTask && <EditModal selectedTask={selectedTask} setSelectedTask={setSelectedTask} allTasks ={allTasks} api={api} allCategory={allCategory} getData={getData}/>}
-        {/* <EditModal selectedTask={selectedTask} setSelectedTask={setSelectedTask} allTasks ={allTasks} api={api} allCategory={allCategory}/> */}
-        <TaskForm allTasks={allTasks} setAllTasks ={setAllTasks} allCategory={allCategory}setAllCategory={setAllCategory} api={api}/>
+        <TaskForm allTasks={allTasks} setAllTasks ={setAllTasks} allCategory={allCategory}setAllCategory={setAllCategory} api={api} getData={getData}/>
       {allTasks.map((eachTask,i) => {
           return(
-            <ul key={eachTask.id} style={{border:"1px solid white"}}>
-                <li >{eachTask.title}</li>
-                <li>{eachTask.description}</li>
-                <li>{eachTask.isUrgent}</li>
-                <li>{eachTask.isDone}</li>
-                <li>{eachTask.dueDate}</li>
-                <li>{eachTask.category.title}</li>
-                
-                
-                <button onClick={() => {handelDelete(eachTask.id)}} >delete</button>
-                <button onClick={() => {setSelectedTask(eachTask)}}>edit</button>
-                
-
-            </ul>
+            <TaskCard key={eachTask.id} eachTask={eachTask} allTasks={allTasks} allCategory={allCategory} handelDelete={handelDelete} setSelectedTask={setSelectedTask}/>
+            
           )
         },
       )}
