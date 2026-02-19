@@ -22,7 +22,7 @@ const theme = createTheme({
     },
   },
   shape: {
-    borderRadius: 16,
+    borderRadius: 10,
   },
   typography: {
     fontFamily: "Inter, Roboto, Arial, sans-serif",

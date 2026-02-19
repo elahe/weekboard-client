@@ -6,7 +6,9 @@ import About from './pages/About';
 import { useEffect } from 'react';
 import axios from 'axios';
 import CategoryPage from './pages/CategoryPage';
-
+import Navbar from "./components/Navbar";
+import { Triangle } from 'react-loader-spinner';
+import { Box } from '@mui/material';
 
 function App() {
   const API = import.meta.env.VITE_API_URL;
@@ -38,13 +40,27 @@ function App() {
   //conditions should be after hooks
 
   if (allCategory === null ||allTasks === null ) {
-    return <h3>loading...</h3>;
+    return(
+      <Box sx={{minHeight:"100vh" ,display:"flex", alignItems:"center", justifyContent:"center"}}>
+        <Triangle
+          visible={true}
+          height="80"
+          width="80"
+          color="#F05A28"
+          ariaLabel="triangle-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          />
+      </Box>
+    )
+
   }
 
 
 
   return (
     <>
+      <Navbar />
       <Routes>
         <Route path='/' element={<Homepage allTasks={allTasks} setAllTasks={setAllTasks} allCategory={allCategory} setAllCategory={setAllCategory} api={API} getData={getData}/>}></Route>
         <Route path='/About' element={<About/>}></Route>
