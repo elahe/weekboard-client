@@ -6,24 +6,32 @@ import App from './App.jsx'
 
 const theme = createTheme({
   palette: {
-    mode: 'light',
+    mode: "light",
     primary: {
-      main: '#1976d2', // default MUI blue (we can change later to match design)
+      main: "#F05A28", // orange from screenshot
     },
-    secondary: {
-      main: '#9c27b0',
+    success: {
+      main: "#3BA776", // green circle
+    },
+    error: {
+      main: "#EF4444", // red circle
     },
     background: {
-      default: '#f5f5f5',
+      default: "#F8F6F4", // warm light background
+      paper: "#FFFFFF",
     },
   },
   shape: {
-    borderRadius: 12,
+    borderRadius: 16,
   },
   typography: {
-    fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+    fontFamily: "Inter, Roboto, Arial, sans-serif",
+    h4: {
+      fontWeight: 800,
+    },
   },
-})
+});
+
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
