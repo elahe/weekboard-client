@@ -5,6 +5,8 @@ import Homepage from './pages/Homepage';
 import About from './pages/About';
 import { useEffect } from 'react';
 import axios from 'axios';
+import CategoryPage from './pages/CategoryPage';
+
 
 function App() {
   const API = import.meta.env.VITE_API_URL;
@@ -20,7 +22,7 @@ function App() {
         const taskDate = new Date(element.dueDate);
         element.dayOfWeek = taskDate.toLocaleDateString('en-US', { weekday: 'long' });
       });
-      console.log(Response.data)
+      // console.log(Response.data)
       setAllTasks(Response.data);
       const response = await axios.get(`${API}/categories`)
       setAllCategory(response.data)
@@ -46,6 +48,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Homepage allTasks={allTasks} setAllTasks={setAllTasks} allCategory={allCategory} setAllCategory={setAllCategory} api={API} getData={getData}/>}></Route>
         <Route path='/About' element={<About/>}></Route>
+        <Route path='/category' element={<CategoryPage allTasks={allTasks} allCategory={allCategory}/>}></Route>
       </Routes>
      
     </>
