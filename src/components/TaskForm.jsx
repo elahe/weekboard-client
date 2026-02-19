@@ -15,6 +15,7 @@ export default function TaskForm({ allTasks, setAllTasks,allCategory,setAllCateg
             id : `${Date.now()}`,
             title,
             isUrgent,
+            isDone : false,
             description,
             dueDate,
             categoryId

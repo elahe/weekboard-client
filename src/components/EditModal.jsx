@@ -28,7 +28,7 @@ export default function EditModal({
       categoryId,
     };
     try {
-      await axios.put(`${api}/tasks/${selectedTask.id}`, body);
+      await axios.patch(`${api}/tasks/${selectedTask.id}`, body);
       console.log(body);
       setSelectedTask(null) // for closing the modal
       getData();
@@ -52,7 +52,7 @@ export default function EditModal({
           <input
             type="checkbox"
             value={isUrgent}
-            onChange={(e) => setIsUrgent(e.target.value)}
+            onChange={(e) => setIsUrgent(e.target.checked)}
           ></input>
         </label>
         <select>
