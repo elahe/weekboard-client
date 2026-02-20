@@ -62,10 +62,10 @@ export default function About() {
 
               <Box>
                 <Typography sx={{ fontWeight: 900, fontSize: 18 }}>
-                  Your Name Here
+                  Elahe Hashemi
                 </Typography>
                 <Typography sx={{ opacity: 0.75, mt: 0.5 }}>
-                  Software Engineer • React • Week planner project
+                  Front-End Developer • React • Week planner project
                 </Typography>
 
                 <Button
